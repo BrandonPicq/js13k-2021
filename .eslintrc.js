@@ -4,17 +4,13 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+  extends: ['google'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['simple-import-sort'],
   rules: {
-    'arrow-body-style': ['error', 'as-needed'],
-    'func-style': 'error',
-    'no-restricted-syntax': ['error', 'VariableDeclaration[kind!="var"]'],
-    'object-shorthand': 'error',
-    'simple-import-sort/imports': 'error',
+    'require-jsdoc': 'off',
+    'camelcase': 'off',
   },
 };
