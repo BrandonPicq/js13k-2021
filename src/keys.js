@@ -1,4 +1,4 @@
-export var keys_create = () => {
+export const keys_create = () => {
   const keys = {};
 
   addEventListener('keydown', (event) => (keys[event.code] = true));

@@ -1,6 +1,6 @@
 import {bufferAttr_copyVector3sArray} from './bufferAttr.js';
 
-export var bufferGeom_fromGeom = (geom) => {
+export const bufferGeom_fromGeom = (geom) => {
   const vertices = [];
   const colors = [];
 

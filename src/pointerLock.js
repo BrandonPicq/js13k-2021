@@ -1,4 +1,4 @@
-export var pointerLock_create = (controls, element) => {
+export const pointerLock_create = (controls, element) => {
   document.addEventListener(
       'pointerlockchange',
       () => (controls.enabled = element === document.pointerLockElement),

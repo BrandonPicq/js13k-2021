@@ -86,7 +86,7 @@ const _q0 = quat_create();
 const _v0 = vec3_create();
 const _v1 = vec3_create();
 
-export var map0 = (gl, scene, camera) => {
+export const map0 = (gl, scene, camera) => {
   const map = object3d_create();
   object3d_add(scene, map);
 
@@ -253,17 +253,17 @@ export var map0 = (gl, scene, camera) => {
   object3d_add(map, dreadnoughtMesh);
 
   /*
-  var createHealthPack = () => {
-    var material = material_create();
+  let createHealthPack = () => {
+    let material = material_create();
     vec3_set(material.emissive, 0.5, 0.5, 2);
     vec3_setScalar(material.color, 0.5);
-    var mesh = mesh_create(healthPack_create(), material);
+    let mesh = mesh_create(healthPack_create(), material);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     return mesh;
   };
 
-  var healthPack = createHealthPack();
+  let healthPack = createHealthPack();
   vec3_set(healthPack.position, 0, 0, -128);
   object3d_add(map, healthPack);
   */
@@ -341,7 +341,7 @@ export var map0 = (gl, scene, camera) => {
       return target;
     });
 
-  const fireShipBullet = () => {
+  const _fireShipBullet = () => {
     const bulletGeometry = boxGeom_create(16, 16, 48);
     const bulletMaterial = material_create();
     vec3_set(bulletMaterial.emissive, 2, 0.5, 0.5);
@@ -377,10 +377,10 @@ export var map0 = (gl, scene, camera) => {
 
   const createPhantomEnemy = () => {
     const PHANTOM_STATE_NONE = 0;
-    const PHANTOM_STATE_IDLE = 1;
+    const _PHANTOM_STATE_IDLE = 1;
     const PHANTOM_STATE_ALERT = 2;
-    const PHANTOM_STATE_SHOOT = 3;
-    const PHANTOM_STATE_MELEE = 4;
+    const _PHANTOM_STATE_SHOOT = 3;
+    const _PHANTOM_STATE_MELEE = 4;
 
     const PHANTOM_Y = 52;
 
@@ -396,7 +396,7 @@ export var map0 = (gl, scene, camera) => {
 
     const enemyBulletInterval = interval_create(1.1);
 
-    var mesh = entity_add(
+    const mesh = entity_add(
         enemyHealth_create(physics_add(createPhantomMesh(), BODY_DYNAMIC), 5),
         component_create((dt) => {
           if (state === PHANTOM_STATE_NONE && findTarget(mesh, playerMesh)) {
@@ -532,9 +532,9 @@ export var map0 = (gl, scene, camera) => {
 
   const createScannerEnemy = () => {
     const SCANNER_STATE_NONE = 0;
-    const SCANNER_STATE_IDLE = 1;
+    const _SCANNER_STATE_IDLE = 1;
     const SCANNER_STATE_ALERT = 2;
-    const SCANNER_STATE_SHOOT = 2;
+    const _SCANNER_STATE_SHOOT = 2;
 
     let state = SCANNER_STATE_NONE;
     const forceVelocity = vec3_create();
@@ -554,7 +554,7 @@ export var map0 = (gl, scene, camera) => {
     // CNPC_Manhack:MaintainGroundHeight
     const minGroundHeight = 32;
 
-    var mesh = entity_add(
+    const mesh = entity_add(
         enemyHealth_create(physics_add(createScannerMesh(), BODY_DYNAMIC), 2),
         component_create((dt) => {
           if (state === SCANNER_STATE_NONE && findTarget(mesh, playerMesh)) {
@@ -696,18 +696,18 @@ export var map0 = (gl, scene, camera) => {
     object3d_add(map, enemyMesh);
   }
 
-  var createExplosion = (position) => {
+  const createExplosion = (position) => {
     const explosion = explosion_create(4);
     Object.assign(explosion.position, position);
     object3d_add(map, explosion);
   };
 
   const bulletInterval = interval_create(0.1);
-  const shipBulletInterval = interval_create(5);
+  const _shipBulletInterval = interval_create(5);
 
   let bodies;
   let staticBodies;
-  let staticMeshes;
+  let _staticMeshes;
 
   const phantomSpawnInterval = interval_create(7);
   const scannerSpawnInterval = interval_create(3);

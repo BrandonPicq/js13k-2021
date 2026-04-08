@@ -22,7 +22,7 @@ const centroidA = vec3_create();
 const centroidB = vec3_create();
 
 // Color#set().
-export var setVector = (vector, value, identity) => {
+export const setVector = (vector, value, identity) => {
   if (Array.isArray(value)) {
     vec3_set(vector, ...value);
   } else if (typeof value === 'object') {
@@ -54,8 +54,8 @@ const relativeAlignBoxVertices = (geomA, indicesA, geomB, indicesB) => {
   return geom_translate(geomA, -_vector.x, -_vector.y, -_vector.z);
 };
 
-export var align = rearg(alignBoxVertices);
-export var relativeAlign = rearg(relativeAlignBoxVertices);
+export const align = rearg(alignBoxVertices);
+export const relativeAlign = rearg(relativeAlignBoxVertices);
 
 const transformBoxVertices = (method, identity = vec3_create()) => (
     geom,
@@ -69,8 +69,8 @@ const transformBoxVertices = (method, identity = vec3_create()) => (
   return geom;
 };
 
-export var $translate = rearg(transformBoxVertices(vec3_add));
-export var $scale = rearg(
+export const $translate = rearg(transformBoxVertices(vec3_add));
+export const $scale = rearg(
     transformBoxVertices(vec3_multiply, vec3_create(1, 1, 1)),
 );
 
@@ -89,9 +89,9 @@ const transformAxisBoxVertices = (method, identity = vec3_create()) => (axis) =>
 
 const translateAxisBoxVertices = transformAxisBoxVertices(vec3_add);
 
-export var $translateX = rearg(translateAxisBoxVertices('x'));
-export var $translateY = rearg(translateAxisBoxVertices('y'));
-export var $translateZ = rearg(translateAxisBoxVertices('z'));
+export const $translateX = rearg(translateAxisBoxVertices('x'));
+export const $translateY = rearg(translateAxisBoxVertices('y'));
+export const $translateZ = rearg(translateAxisBoxVertices('z'));
 
 const callBoxVertices = (method) => (geom, ...vectors) => {
   vectors.map(([indices, value]) =>
@@ -101,12 +101,12 @@ const callBoxVertices = (method) => (geom, ...vectors) => {
   return geom;
 };
 
-export var $set = rearg(callBoxVertices(vec3_fromArray));
-export var $setX = rearg(callBoxVertices(vec3_setX));
-export var $setY = rearg(callBoxVertices(vec3_setY));
-export var $setZ = rearg(callBoxVertices(vec3_setZ));
+export const $set = rearg(callBoxVertices(vec3_fromArray));
+export const $setX = rearg(callBoxVertices(vec3_setX));
+export const $setY = rearg(callBoxVertices(vec3_setY));
+export const $setZ = rearg(callBoxVertices(vec3_setZ));
 
-export var extrude = (() => {
+export const extrude = (() => {
   const identity = vec3_create();
   const oppositeIndices = new Map([
     [px, nx],
@@ -141,7 +141,7 @@ export var extrude = (() => {
   };
 })();
 
-export var deleteFaces = rearg((geom, ...faceIndices) => {
+export const deleteFaces = rearg((geom, ...faceIndices) => {
   faceIndices
       .flat()
       .sort((a, b) => a - b)

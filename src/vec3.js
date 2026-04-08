@@ -1,88 +1,88 @@
-export var vec3_create = (x = 0, y = 0, z = 0) => ({x, y, z});
+export const vec3_create = (x = 0, y = 0, z = 0) => ({x, y, z});
 
 const _vector = vec3_create();
 
-export var vec3_set = (v, x, y, z) => {
+export const vec3_set = (v, x, y, z) => {
   v.x = x;
   v.y = y;
   v.z = z;
   return v;
 };
 
-export var vec3_setScalar = (v, scalar) => {
+export const vec3_setScalar = (v, scalar) => {
   v.x = scalar;
   v.y = scalar;
   v.z = scalar;
   return v;
 };
 
-export var vec3_setX = (v, x) => {
+export const vec3_setX = (v, x) => {
   v.x = x;
   return v;
 };
 
-export var vec3_setY = (v, y) => {
+export const vec3_setY = (v, y) => {
   v.y = y;
   return v;
 };
 
-export var vec3_setZ = (v, z) => {
+export const vec3_setZ = (v, z) => {
   v.z = z;
   return v;
 };
 
-export var vec3_clone = (v) => vec3_create(v.x, v.y, v.z);
+export const vec3_clone = (v) => vec3_create(v.x, v.y, v.z);
 
-export var vec3_add = (a, b) => {
+export const vec3_add = (a, b) => {
   a.x += b.x;
   a.y += b.y;
   a.z += b.z;
   return a;
 };
 
-export var vec3_addVectors = (v, a, b) => {
+export const vec3_addVectors = (v, a, b) => {
   v.x = a.x + b.x;
   v.y = a.y + b.y;
   v.z = a.z + b.z;
   return v;
 };
 
-export var vec3_addScaledVector = (a, b, s) => {
+export const vec3_addScaledVector = (a, b, s) => {
   a.x += b.x * s;
   a.y += b.y * s;
   a.z += b.z * s;
   return a;
 };
 
-export var vec3_sub = (a, b) => {
+export const vec3_sub = (a, b) => {
   a.x -= b.x;
   a.y -= b.y;
   a.z -= b.z;
   return a;
 };
 
-export var vec3_subVectors = (v, a, b) => {
+export const vec3_subVectors = (v, a, b) => {
   v.x = a.x - b.x;
   v.y = a.y - b.y;
   v.z = a.z - b.z;
   return v;
 };
 
-export var vec3_multiply = (a, b) => {
+export const vec3_multiply = (a, b) => {
   a.x *= b.x;
   a.y *= b.y;
   a.z *= b.z;
   return a;
 };
 
-export var vec3_multiplyScalar = (v, scalar) => {
+export const vec3_multiplyScalar = (v, scalar) => {
   v.x *= scalar;
   v.y *= scalar;
   v.z *= scalar;
   return v;
 };
 
-export var vec3_applyMatrix4 = (v, m) => {
+export const vec3_applyMatrix4 = (v, m) => {
   const {x, y, z} = v;
 
   const w = 1 / (m[3] * x + m[7] * y + m[11] * z + m[15]);
@@ -94,7 +94,7 @@ export var vec3_applyMatrix4 = (v, m) => {
   return v;
 };
 
-export var vec3_applyQuaternion = (v, q) => {
+export const vec3_applyQuaternion = (v, q) => {
   const {x, y, z} = v;
   const qx = q.x;
   const qy = q.y;
@@ -117,7 +117,7 @@ export var vec3_applyQuaternion = (v, q) => {
   return v;
 };
 
-export var vec3_transformDirection = (v, m) => {
+export const vec3_transformDirection = (v, m) => {
   // input: THREE.Matrix4 affine matrix
   // vector interpreted as a direction
 
@@ -130,57 +130,57 @@ export var vec3_transformDirection = (v, m) => {
   return vec3_normalize(v);
 };
 
-export var vec3_divideScalar = (v, scalar) =>
+export const vec3_divideScalar = (v, scalar) =>
   vec3_multiplyScalar(v, 1 / scalar);
 
-export var vec3_min = (a, b) => {
+export const vec3_min = (a, b) => {
   a.x = Math.min(a.x, b.x);
   a.y = Math.min(a.y, b.y);
   a.z = Math.min(a.z, b.z);
   return a;
 };
 
-export var vec3_max = (a, b) => {
+export const vec3_max = (a, b) => {
   a.x = Math.max(a.x, b.x);
   a.y = Math.max(a.y, b.y);
   a.z = Math.max(a.z, b.z);
   return a;
 };
 
-export var vec3_round = (v) => {
+export const vec3_round = (v) => {
   v.x = Math.round(v.x);
   v.y = Math.round(v.y);
   v.z = Math.round(v.z);
   return v;
 };
 
-export var vec3_negate = (v) => {
+export const vec3_negate = (v) => {
   v.x = -v.x;
   v.y = -v.y;
   v.z = -v.z;
   return v;
 };
 
-export var vec3_dot = (a, b) => a.x * b.x + a.y * b.y + a.z * b.z;
+export const vec3_dot = (a, b) => a.x * b.x + a.y * b.y + a.z * b.z;
 
-export var vec3_length = (v) => Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+export const vec3_length = (v) => Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 
-export var vec3_normalize = (v) => vec3_divideScalar(v, vec3_length(v) || 1);
+export const vec3_normalize = (v) => vec3_divideScalar(v, vec3_length(v) || 1);
 
-export var vec3_setLength = (v, length) =>
+export const vec3_setLength = (v, length) =>
   vec3_multiplyScalar(vec3_normalize(v), length);
 
-export var vec3_lerp = (a, b, t) => {
+export const vec3_lerp = (a, b, t) => {
   a.x += (b.x - a.x) * t;
   a.y += (b.y - a.y) * t;
   a.z += (b.z - a.z) * t;
   return a;
 };
 
-export var vec3_lerpVectors = (v, a, b, t) =>
+export const vec3_lerpVectors = (v, a, b, t) =>
   vec3_add(vec3_multiplyScalar(vec3_subVectors(v, b, a), t), a);
 
-export var vec3_cross = (a, b) => {
+export const vec3_cross = (a, b) => {
   const {x, y, z} = a;
 
   a.x = y * b.z - z * b.y;
@@ -190,7 +190,7 @@ export var vec3_cross = (a, b) => {
   return a;
 };
 
-export var vec3_crossVectors = (v, a, b) => {
+export const vec3_crossVectors = (v, a, b) => {
   const ax = a.x;
   const ay = a.y;
   const az = a.z;
@@ -206,7 +206,7 @@ export var vec3_crossVectors = (v, a, b) => {
   return v;
 };
 
-export var vec3_reflect = (v, normal) =>
+export const vec3_reflect = (v, normal) =>
   // reflect incident vector off plane orthogonal to normal
   // normal is assumed to have unit length
   vec3_sub(
@@ -217,40 +217,40 @@ export var vec3_reflect = (v, normal) =>
       ),
   );
 
-export var vec3_distanceTo = (a, b) => Math.sqrt(vec3_distanceToSquared(a, b));
+export const vec3_distanceTo = (a, b) => Math.sqrt(vec3_distanceToSquared(a, b));
 
-export var vec3_distanceToSquared = (a, b) => {
+export const vec3_distanceToSquared = (a, b) => {
   const dx = a.x - b.x;
   const dy = a.y - b.y;
   const dz = a.z - b.z;
   return dx * dx + dy * dy + dz * dz;
 };
 
-export var vec3_setFromMatrixPosition = (v, m) => {
+export const vec3_setFromMatrixPosition = (v, m) => {
   v.x = m[12];
   v.y = m[13];
   v.z = m[14];
   return v;
 };
 
-export var vec3_equals = (a, b) => a.x === b.x && a.y === b.y && a.z === b.z;
+export const vec3_equals = (a, b) => a.x === b.x && a.y === b.y && a.z === b.z;
 
-export var vec3_fromArray = (v, array) => {
+export const vec3_fromArray = (v, array) => {
   v.x = array[0];
   v.y = array[1];
   v.z = array[2];
   return v;
 };
 
-export var vec3_X = vec3_create(1, 0, 0);
-export var vec3_Y = vec3_create(0, 1, 0);
-export var vec3_Z = vec3_create(0, 0, 1);
+export const vec3_X = vec3_create(1, 0, 0);
+export const vec3_Y = vec3_create(0, 1, 0);
+export const vec3_Z = vec3_create(0, 0, 1);
 
 // https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/bg_pmove.c
-export var OVERCLIP = 1.001;
+export const OVERCLIP = 1.001;
 
 // Slide off of the impacting surface
-export var pm_clipVelocity = (vector, normal, overbounce) => {
+export const pm_clipVelocity = (vector, normal, overbounce) => {
   let backoff = vec3_dot(vector, normal);
 
   if (backoff < 0) {

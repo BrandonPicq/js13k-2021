@@ -41,7 +41,7 @@ const g_gravity = 800;
 
 const player_groundTrace_normal = vec3_clone(vec3_Y);
 
-export var player_create = (object, body) => ({
+export const player_create = (object, body) => ({
   object,
   body,
 
@@ -62,7 +62,7 @@ export var player_create = (object, body) => ({
   walking: false,
 });
 
-export var player_update = (player) => {
+export const player_update = (player) => {
   if (player.command.y < 10) {
     // not holding jump
     player.jump = false;
@@ -81,7 +81,7 @@ export var player_update = (player) => {
   player_checkGround(player);
 };
 
-export var trace_create = () => ({
+export const trace_create = () => ({
   allsolid: false,
   fraction: 1,
   endpos: vec3_create(),
@@ -105,7 +105,7 @@ const trace_reset = (() => {
   };
 })();
 
-export var body_trace = (() => {
+export const body_trace = (() => {
   const boxA = box3_create();
   const boxB = box3_create();
   const sweptBoxA = box3_create();
@@ -239,7 +239,7 @@ const player_slideMove = (() => {
       // out along it, which fixes some epsilon issues with
       // non-axial planes
       //
-      for (var i = 0; i < numplanes; i++) {
+      for (let i = 0; i < numplanes; i++) {
         if (vec3_dot(trace.normal, planes[i]) > 0.99) {
           vec3_add(player.body.velocity, trace.normal);
           break;
@@ -376,7 +376,7 @@ const player_checkJump = (player) => {
   return true;
 };
 
-var player_walkMove = (() => {
+const player_walkMove = (() => {
   const wishvel = vec3_create();
   const wishdir = vec3_create();
 
@@ -434,7 +434,7 @@ var player_walkMove = (() => {
   };
 })();
 
-var player_airMove = (() => {
+const player_airMove = (() => {
   const wishvel = vec3_create();
   const wishdir = vec3_create();
 
@@ -484,7 +484,7 @@ var player_airMove = (() => {
   };
 })();
 
-var player_friction = (() => {
+const player_friction = (() => {
   const vec = vec3_create();
 
   return (player) => {
@@ -521,7 +521,7 @@ var player_friction = (() => {
   };
 })();
 
-var player_cmdScale = (player) => {
+const player_cmdScale = (player) => {
   const max = Math.max(
       Math.abs(player.command.x),
       Math.abs(player.command.y),
@@ -538,7 +538,7 @@ var player_cmdScale = (player) => {
   return scale;
 };
 
-var player_accelerate = (player, wishdir, wishspeed, accel) => {
+const player_accelerate = (player, wishdir, wishspeed, accel) => {
   const currentspeed = vec3_dot(player.body.velocity, wishdir);
   const addspeed = wishspeed - currentspeed;
   if (addspeed <= 0) {
@@ -552,7 +552,7 @@ var player_accelerate = (player, wishdir, wishspeed, accel) => {
   vec3_addScaledVector(player.body.velocity, wishdir, accelspeed);
 };
 
-var player_checkGround = (() => {
+const player_checkGround = (() => {
   const position = vec3_create();
   const trace = trace_create();
 

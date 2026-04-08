@@ -7,7 +7,7 @@ const DEG_TO_RAD = Math.PI / 180;
 
 const _m1 = mat4_create();
 
-export var camera_create = (fov = 60, aspect = 1, near = 0.1, far = 2000) => {
+export const camera_create = (fov = 60, aspect = 1, near = 0.1, far = 2000) => {
   const camera = {
     ...object3d_create(),
     fov,
@@ -24,14 +24,14 @@ export var camera_create = (fov = 60, aspect = 1, near = 0.1, far = 2000) => {
   return camera;
 };
 
-export var camera_lookAt = (camera, vector) => {
+export const camera_lookAt = (camera, vector) => {
   quat_setFromRotationMatrix(
       camera.quaternion,
       mat4_lookAt(_m1, camera.position, vector, camera.up),
   );
 };
 
-export var camera_updateProjectionMatrix = (camera) => {
+export const camera_updateProjectionMatrix = (camera) => {
   const {near, far} = camera;
 
   const top = near * Math.tan(DEG_TO_RAD * 0.5 * camera.fov);
@@ -56,7 +56,7 @@ export var camera_updateProjectionMatrix = (camera) => {
   ]);
 };
 
-export var camera_updateWorldMatrix = (camera) => {
+export const camera_updateWorldMatrix = (camera) => {
   object3d_updateWorldMatrix(camera);
   camera.matrixWorldInverse.set(camera.matrixWorld);
   mat4_invert(camera.matrixWorldInverse);

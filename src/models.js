@@ -81,17 +81,17 @@ const EPSILON = 1e-2;
 const _quat = quat_create();
 const _vector = vec3_create();
 
-export var box = (dimensions, ...transforms) =>
+export const box = (dimensions, ...transforms) =>
   flow(...transforms)(boxGeom_create(...dimensions));
 
-export var mergeAll = (...geoms) => flow(...geoms.map(merge))(geom_create());
+export const mergeAll = (...geoms) => flow(...geoms.map(merge))(geom_create());
 
-export var spaceBetween = (start, end, count) => {
+export const spaceBetween = (start, end, count) => {
   const spacing = (end - start) / (count + 1);
   return [...Array(count)].map((_, index) => start + spacing * (index + 1));
 };
 
-export var bridge_create = (start, end, width, height) => {
+export const bridge_create = (start, end, width, height) => {
   vec3_subVectors(_vector, end, start);
   const dx = _vector.x;
   const dz = _vector.z;
@@ -107,7 +107,7 @@ export var bridge_create = (start, end, width, height) => {
   );
 };
 
-export var column_create = (
+export const column_create = (
     columnWidth,
     columnHeight,
     columnDepth = columnWidth,
@@ -137,7 +137,7 @@ vec3_setScalar(disintegrationMaterial.emissive, 1);
 const disintegrationCoreMaterial = material_create();
 vec3_setScalar(disintegrationCoreMaterial.color, 0);
 
-export var disintegration_create = (boundingBox, count) => {
+export const disintegration_create = (boundingBox, count) => {
   const disintegration = object3d_create();
   const decay = 5;
   const center = box3_getCenter(boundingBox, vec3_create());
@@ -197,7 +197,7 @@ export var disintegration_create = (boundingBox, count) => {
   );
 };
 
-export var dreadnought_create = () => {
+export const dreadnought_create = () => {
   const frontLength = 12288;
   const width = 3072;
 
@@ -288,7 +288,7 @@ const explosionMaterials = [
   return material;
 });
 
-export var explosion_create = (count) => {
+export const explosion_create = (count) => {
   const explosion = object3d_create();
   const decay = 8;
 
@@ -336,7 +336,7 @@ export var explosion_create = (count) => {
   );
 };
 
-export var greeble_create = (() => {
+export const greeble_create = (() => {
   const _v0 = vec3_create();
   const _v1 = vec3_create();
   const _matrix = mat4_create();
@@ -428,7 +428,7 @@ export var greeble_create = (() => {
   };
 })();
 
-export var phantom_create = () => {
+export const phantom_create = () => {
   const width = 40;
   const height = 72;
   const depth = 16;
@@ -493,7 +493,7 @@ export var phantom_create = () => {
   return mergeAll(head, rightSide, leftSide, eye);
 };
 
-export var platform_create = (width, height, depth, strokeWidth) => {
+export const platform_create = (width, height, depth, strokeWidth) => {
   const innerWidth = width - 4 * strokeWidth;
   const innerDepth = depth - 4 * strokeWidth;
   const deleteSideFaces = deleteFaces(face_px, face_nx, face_pz, face_nz);
@@ -594,7 +594,7 @@ export var platform_create = (width, height, depth, strokeWidth) => {
   );
 };
 
-export var scanner_create = () => {
+export const scanner_create = () => {
   const size = 16;
   const length = 32;
   const headLength = 6;
@@ -621,7 +621,7 @@ export var scanner_create = () => {
   );
 };
 
-export var starfield_create = (radius, count) => {
+export const starfield_create = (radius, count) => {
   const stars = [];
 
   for (let i = 0; i < count; i++) {
@@ -645,7 +645,7 @@ export var starfield_create = (radius, count) => {
   return mergeAll(...stars);
 };
 
-export var healthPack_create = () => {
+export const healthPack_create = () => {
   const size = 32;
   const depth = 8;
   return translate(

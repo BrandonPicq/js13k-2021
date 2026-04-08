@@ -25,7 +25,7 @@ const _v1 = vec3_create();
 const _q1 = quat_create();
 const _m1 = mat4_create();
 
-export var object3d_create = () => ({
+export const object3d_create = () => ({
   parent: undefined,
   children: [],
   components: [],
@@ -40,43 +40,43 @@ export var object3d_create = () => ({
   receiveShadow: false,
 });
 
-export var object3d_lookAt = (object, vector) => {
+export const object3d_lookAt = (object, vector) => {
   quat_setFromRotationMatrix(
       object.quaternion,
       mat4_lookAt(_m1, vector, object.position, vec3_Y),
   );
 };
 
-export var object3d_add = (parent, child) => {
+export const object3d_add = (parent, child) => {
   child.parent = parent;
   parent.children.push(child);
   return parent;
 };
 
-export var object3d_remove = (parent, child) => {
+export const object3d_remove = (parent, child) => {
   const index = parent.children.indexOf(child);
   if (index >= 0) {
     parent.children.splice(index, 1);
   }
 };
 
-export var object3d_rotateOnAxis = (obj, axis, angle) => {
+export const object3d_rotateOnAxis = (obj, axis, angle) => {
   // rotate object on axis in object space
   // axis is assumed to be normalized
   quat_multiply(obj.quaternion, quat_setFromAxisAngle(_q1, axis, angle));
   return obj;
 };
 
-export var object3d_rotateX = (obj, angle) =>
+export const object3d_rotateX = (obj, angle) =>
   object3d_rotateOnAxis(obj, vec3_X, angle);
 
-export var object3d_rotateY = (obj, angle) =>
+export const object3d_rotateY = (obj, angle) =>
   object3d_rotateOnAxis(obj, vec3_Y, angle);
 
-export var object3d_rotateZ = (obj, angle) =>
+export const object3d_rotateZ = (obj, angle) =>
   object3d_rotateOnAxis(obj, vec3_Z, angle);
 
-export var object3d_translateOnAxis = (obj, axis, distance) => {
+export const object3d_translateOnAxis = (obj, axis, distance) => {
   // translate object by distance along axis in object space
   // axis is assumed to be normalized
   vec3_add(
@@ -89,25 +89,25 @@ export var object3d_translateOnAxis = (obj, axis, distance) => {
   return obj;
 };
 
-export var object3d_translateX = (obj, distance) =>
+export const object3d_translateX = (obj, distance) =>
   object3d_translateOnAxis(obj, vec3_X, distance);
 
-export var object3d_translateY = (obj, distance) =>
+export const object3d_translateY = (obj, distance) =>
   object3d_translateOnAxis(obj, vec3_Y, distance);
 
-export var object3d_translateZ = (obj, distance) =>
+export const object3d_translateZ = (obj, distance) =>
   object3d_translateOnAxis(obj, vec3_Z, distance);
 
-export var object3d_traverse = (obj, callback) => {
+export const object3d_traverse = (obj, callback) => {
   callback(obj);
   obj.children.map((child) => object3d_traverse(child, callback));
 };
 
-export var object3d_updateMatrix = (obj) => {
+export const object3d_updateMatrix = (obj) => {
   mat4_compose(obj.matrix, obj.position, obj.quaternion, obj.scale);
 };
 
-export var object3d_updateWorldMatrix = (obj) => {
+export const object3d_updateWorldMatrix = (obj) => {
   object3d_updateMatrix(obj);
 
   if (!obj.parent) {

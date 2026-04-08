@@ -2,7 +2,7 @@ import {mat4_create} from './mat4.js';
 import {object3d_create} from './object3d.js';
 import {vec3_clone, vec3_Y} from './vec3.js';
 
-export var orthoCamera_create = (
+export const orthoCamera_create = (
     left = -1,
     right = 1,
     top = 1,
@@ -28,7 +28,7 @@ export var orthoCamera_create = (
   return camera;
 };
 
-export var orthoCamera_updateProjectionMatrix = (camera) => {
+export const orthoCamera_updateProjectionMatrix = (camera) => {
   const {left, right, top, bottom, near, far} = camera;
 
   const w = 1 / (right - left);

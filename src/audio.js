@@ -40,14 +40,14 @@ const generateNotes = (fn, duration, volume) =>
 
 // Oscillators
 // f: frequency, t: parameter.
-const sin = (f) => (t) => Math.sin(t * 2 * Math.PI * f);
+const _sin = (f) => (t) => Math.sin(t * 2 * Math.PI * f);
 
 const saw = (f) => (t) => {
   const n = ((t % (1 / f)) * f) % 1;
   return -1 + 2 * n;
 };
 
-const tri = (f) => (t) => {
+const _tri = (f) => (t) => {
   const n = ((t % (1 / f)) * f) % 1;
   return n < 0.5 ? -1 + 2 * (2 * n) : 1 - 2 * (2 * n);
 };
@@ -73,7 +73,7 @@ const noise = () => {
 };
 
 // Operators.
-const add = (a, b) => (f) => {
+const _add = (a, b) => (f) => {
   const af = a(f);
   const bf = b(f);
 
@@ -87,12 +87,12 @@ const mul = (a, b) => (f) => {
   return (t, i, a) => af(t, i, a) * bf(t, i, a);
 };
 
-const scale = (fn, n) => (f) => {
+const _scale = (fn, n) => (f) => {
   const fnf = fn(f);
   return (t, i, a) => n * fnf(t, i, a);
 };
 
-const slide = (fn, slide) => (f) => (t, i, a) =>
+const _slide = (fn, slide) => (f) => (t, i, a) =>
   fn(f + (i / a.length) * slide)(t, i, a);
 
 const pitchJump = (fn, pitchJump, pitchJumpTime) => (f) => (t, i, a) =>
@@ -161,7 +161,7 @@ destination.connect(convolver).connect(wet).connect(audioContext.destination);
 const play = (sound) => playSound(sound, destination);
 
 const shoot = generateNotes(mul(mul(saw, noise), decay(24)), 0.5, 1);
-export var playShoot = () => play(shoot[16]);
+export const playShoot = () => play(shoot[16]);
 
 const jump = generateNotes(
     mul(
@@ -171,7 +171,7 @@ const jump = generateNotes(
     0.3,
     0.2,
 );
-export var playJump = () => play(jump[31]);
+export const playJump = () => play(jump[31]);
 
 const enemyDeath = generateNotes(
     mul(
@@ -181,7 +181,7 @@ const enemyDeath = generateNotes(
     1,
     0.4,
 );
-export var playEnemyDeath = () => play(enemyDeath[15]);
+export const playEnemyDeath = () => play(enemyDeath[15]);
 
 
 addEventListener('click', () => audioContext.resume(), {once: true});

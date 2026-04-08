@@ -1,4 +1,4 @@
-export var interval_create = (duration) => {
+export const interval_create = (duration) => {
   let previousTime = 0;
   let time = duration;
 

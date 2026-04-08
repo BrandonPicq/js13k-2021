@@ -1,4 +1,4 @@
-export var createShaderProgram = (gl, vs, fs) => {
+export const createShaderProgram = (gl, vs, fs) => {
   const program = gl.createProgram();
 
   const createShader = (type, source) => {
@@ -16,26 +16,26 @@ export var createShaderProgram = (gl, vs, fs) => {
   return program;
 };
 
-export var createFloat32Buffer = (gl, array) => {
+export const createFloat32Buffer = (gl, array) => {
   const buffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, array, gl.STATIC_DRAW);
   return buffer;
 };
 
-export var setFloat32Attribute = (gl, location, buffer, size) => {
+export const setFloat32Attribute = (gl, location, buffer, size) => {
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.enableVertexAttribArray(location);
   gl.vertexAttribPointer(location, size, gl.FLOAT, false, 0, 0);
 };
 
-export var setMat4Uniform = (gl, location, array) =>
+export const setMat4Uniform = (gl, location, array) =>
   gl.uniformMatrix4fv(location, false, array);
 
-export var setVec3Uniform = (gl, location, vector) =>
+export const setVec3Uniform = (gl, location, vector) =>
   gl.uniform3f(location, vector.x, vector.y, vector.z);
 
-export var getAttributeLocations = (gl, program) => {
+export const getAttributeLocations = (gl, program) => {
   const locations = {};
 
   const count = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
@@ -49,7 +49,7 @@ export var getAttributeLocations = (gl, program) => {
   return locations;
 };
 
-export var getUniformLocations = (gl, program) => {
+export const getUniformLocations = (gl, program) => {
   const locations = {};
 
   const count = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);

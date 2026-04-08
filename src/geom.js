@@ -11,15 +11,15 @@ import {
 
 const _vector = vec3_create();
 
-export var geom_create = () => ({
+export const geom_create = () => ({
   vertices: [],
   faces: [],
 });
 
-export var geom_push = (geom, vertices, faces) => {
+export const geom_push = (geom, vertices, faces) => {
   const offset = geom.vertices.length;
 
-  for (var i = 0; i < vertices.length; ) {
+  for (let i = 0; i < vertices.length; ) {
     geom.vertices.push(
         vec3_create(vertices[i++], vertices[i++], vertices[i++]),
     );
@@ -38,24 +38,24 @@ export var geom_push = (geom, vertices, faces) => {
   return geom;
 };
 
-export var geom_applyQuaternion = (geom, q) => {
+export const geom_applyQuaternion = (geom, q) => {
   geom.vertices.map((vertex) => vec3_applyQuaternion(vertex, q));
   return geom;
 };
 
-export var geom_translate = (geom, x, y, z) => {
+export const geom_translate = (geom, x, y, z) => {
   vec3_set(_vector, x, y, z);
   geom.vertices.map((vertex) => vec3_add(vertex, _vector));
   return geom;
 };
 
-export var geom_scale = (geom, x, y, z) => {
+export const geom_scale = (geom, x, y, z) => {
   vec3_set(_vector, x, y, z);
   geom.vertices.map((vertex) => vec3_multiply(vertex, _vector));
   return geom;
 };
 
-export var geom_merge = (a, b) => {
+export const geom_merge = (a, b) => {
   const vertexOffset = a.vertices.length;
 
   a.vertices.push(...b.vertices.map(vec3_clone));
@@ -73,14 +73,14 @@ export var geom_merge = (a, b) => {
   return a;
 };
 
-export var geom_clone = (geom) => {
+export const geom_clone = (geom) => {
   const clone = geom_create();
   clone.vertices = geom.vertices.map(vec3_clone);
   clone.faces = geom.faces.map(face3_clone);
   return clone;
 };
 
-export var translate = rearg(geom_translate);
-export var scale = rearg(geom_scale);
-export var merge = rearg(geom_merge);
-export var clone = rearg(geom_clone);
+export const translate = rearg(geom_translate);
+export const scale = rearg(geom_scale);
+export const merge = rearg(geom_merge);
+export const clone = rearg(geom_clone);

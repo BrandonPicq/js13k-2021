@@ -5,11 +5,11 @@ import {vec3_create} from './vec3.js';
 const pitchQuat = quat_create();
 const yawQuat = quat_create();
 
-export var controls_create = (object) => {
+export const controls_create = (object) => {
   const pitchEuler = vec3_create();
   const yawEuler = vec3_create();
 
-  var controls = {
+  const controls = {
     object,
     sensitivity: 0.002,
     enabled: false,
@@ -40,5 +40,5 @@ export var controls_create = (object) => {
   return controls;
 };
 
-export var controls_dispose = (controls) =>
+export const controls_dispose = (controls) =>
   removeEventListener('mousemove', controls.onMouseMove);

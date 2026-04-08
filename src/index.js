@@ -281,7 +281,7 @@ const render = () => {
   });
 };
 
-var animate = () => {
+const animate = () => {
   update();
   render();
 

@@ -2,7 +2,7 @@ import {remove} from './utils.js';
 
 const _listeners = new WeakMap();
 
-export var on = (target, type, listener) => {
+export const on = (target, type, listener) => {
   const listeners = _listeners.get(target) || {};
   _listeners.set(target, listeners);
   listeners[type] = listeners[type] || [];
@@ -10,7 +10,7 @@ export var on = (target, type, listener) => {
   return target;
 };
 
-export var off = (target, type, listener) => {
+export const off = (target, type, listener) => {
   if (!type) {
     _listeners.delete(target);
   } else {
@@ -22,7 +22,7 @@ export var off = (target, type, listener) => {
   return target;
 };
 
-export var trigger = (target, type, event) => {
+export const trigger = (target, type, event) => {
   _listeners.get(target)?.[type]?.map((listener) => listener(event));
   return target;
 };

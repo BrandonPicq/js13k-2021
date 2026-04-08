@@ -5,12 +5,12 @@ import {vec3_create, vec3_setFromMatrixPosition} from './vec3.js';
 
 const _lookTarget = vec3_create();
 
-export var lightShadow_create = () => ({
+export const lightShadow_create = () => ({
   camera: orthoCamera_create(-5, 5, 5, -5, 0.5, 500),
   matrix: mat4_create(),
 });
 
-export var lightShadow_updateMatrices = (lightShadow, light) => {
+export const lightShadow_updateMatrices = (lightShadow, light) => {
   const {camera, matrix} = lightShadow;
 
   vec3_setFromMatrixPosition(camera.position, light.matrixWorld);

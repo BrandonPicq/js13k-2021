@@ -1,6 +1,6 @@
 import {geom_create, geom_push} from './geom.js';
 
-export var boxGeom_create = (width, height, depth) => {
+export const boxGeom_create = (width, height, depth) => {
   const halfWidth = width / 2;
   const halfHeight = height / 2;
   const halfDepth = depth / 2;

@@ -24,7 +24,7 @@ const _inverseMatrix = mat4_create();
 
 const _intersectionPoint = vec3_create();
 
-export var ray_create = (
+export const ray_create = (
     origin = vec3_create(),
     direction = vec3_create(),
 ) => ({
@@ -32,19 +32,19 @@ export var ray_create = (
   direction,
 });
 
-export var ray_copy = (a, b) => {
+export const ray_copy = (a, b) => {
   Object.assign(a.origin, b.origin);
   Object.assign(a.direction, b.direction);
   return a;
 };
 
-export var ray_at = (ray, t, target = vec3_create()) =>
+export const ray_at = (ray, t, target = vec3_create()) =>
   vec3_add(
       vec3_multiplyScalar(Object.assign(target, ray.direction), t),
       ray.origin,
   );
 
-export var ray_intersectBox = (ray, box, target) => {
+export const ray_intersectBox = (ray, box, target) => {
   const {origin, direction} = ray;
 
   let txmin = (box.min.x - origin.x) / direction.x;
@@ -87,7 +87,7 @@ export var ray_intersectBox = (ray, box, target) => {
   return ray_at(ray, tmin >= 0 ? tmin : tmax, target);
 };
 
-export var ray_intersectTriangle = (ray, a, b, c, target) => {
+export const ray_intersectTriangle = (ray, a, b, c, target) => {
   // Compute the offset origin, edges, and normal.
   // from http://www.geometrictools.com/GTEngine/Include/Mathematics/GteIntrRay3Triangle3.h
   vec3_crossVectors(
@@ -157,7 +157,7 @@ const checkIntersection = (object, ray, a, b, c, point) => {
 
 const _ray = ray_create();
 
-export var ray_intersectMesh = (ray, object) => {
+export const ray_intersectMesh = (ray, object) => {
   const intersections = [];
 
   _inverseMatrix.set(object.matrixWorld);
@@ -185,13 +185,13 @@ export var ray_intersectMesh = (ray, object) => {
   return intersections;
 };
 
-export var ray_applyMatrix4 = (r, m) => {
+export const ray_applyMatrix4 = (r, m) => {
   vec3_applyMatrix4(r.origin, m);
   vec3_transformDirection(r.direction, m);
   return r;
 };
 
-export var ray_intersectObjects = (ray, objects) =>
+export const ray_intersectObjects = (ray, objects) =>
   objects
       .flatMap((object) => ray_intersectMesh(ray, object))
       .sort((a, b) => a.distance - b.distance);

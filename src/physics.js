@@ -30,11 +30,11 @@ import {
   vec3_subVectors,
 } from './vec3.js';
 
-export var BODY_STATIC = 1;
-export var BODY_DYNAMIC = 2;
-export var BODY_BULLET = 4;
+export const BODY_STATIC = 1;
+export const BODY_DYNAMIC = 2;
+export const BODY_BULLET = 4;
 
-export var physics_create = (entity, physics) => {
+export const physics_create = (entity, physics) => {
   const component = {
     physics,
     boundingBox: box3_setFromObject(box3_create(), entity),
@@ -47,15 +47,15 @@ export var physics_create = (entity, physics) => {
   );
 };
 
-export var physics_add = (entity, physics) =>
+export const physics_add = (entity, physics) =>
   entity_add(entity, physics_create(entity, physics));
 
-export var get_physics_component = (entity) =>
+export const get_physics_component = (entity) =>
   entity_find(entity, is_physics_component);
 
-export var is_physics_component = (object) => object.physics;
+export const is_physics_component = (object) => object.physics;
 
-export var physics_bodies = (object) => {
+export const physics_bodies = (object) => {
   const bodies = [];
 
   object3d_traverse(object, (node) => {
@@ -131,7 +131,7 @@ const narrowPhase = (() => {
   };
 })();
 
-export var sweptAABB = (() => {
+export const sweptAABB = (() => {
   const time = vec3_create();
   const velocity = vec3_create();
 
@@ -232,7 +232,7 @@ export var sweptAABB = (() => {
 const physics_setBoxFromBody = (box, body) =>
   box3_translate(box3_copy(box, body.boundingBox), body.parent.position);
 
-export var physics_update = (() => {
+export const physics_update = (() => {
   const box = box3_create();
   const boxA = box3_create();
   const boxB = box3_create();
@@ -255,8 +255,8 @@ export var physics_update = (() => {
         }
 
         // One projectile.
-        var bullet;
-        var body;
+        let bullet;
+        let body;
 
         if (bodyA.physics === BODY_BULLET || bodyB.physics === BODY_BULLET) {
           if (bodyA.physics === BODY_BULLET) {

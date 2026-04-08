@@ -1,8 +1,8 @@
 import {clamp} from './math.js';
 
-export var quat_create = (x = 0, y = 0, z = 0, w = 1) => ({x, y, z, w});
+export const quat_create = (x = 0, y = 0, z = 0, w = 1) => ({x, y, z, w});
 
-export var quat_set = (q, x, y, z, w) => {
+export const quat_set = (q, x, y, z, w) => {
   q.x = x;
   q.y = y;
   q.z = z;
@@ -10,7 +10,7 @@ export var quat_set = (q, x, y, z, w) => {
   return q;
 };
 
-export var quat_copy = (a, b) => {
+export const quat_copy = (a, b) => {
   a.x = b.x;
   a.y = b.y;
   a.z = b.z;
@@ -18,7 +18,7 @@ export var quat_copy = (a, b) => {
   return a;
 };
 
-export var quat_setFromEuler = (q, euler) => {
+export const quat_setFromEuler = (q, euler) => {
   const {x, y, z} = euler;
 
   // http://www.mathworks.com/matlabcentral/fileexchange/
@@ -41,7 +41,7 @@ export var quat_setFromEuler = (q, euler) => {
   return q;
 };
 
-export var quat_setFromAxisAngle = (q, axis, angle) => {
+export const quat_setFromAxisAngle = (q, axis, angle) => {
   // http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm
   // assumes axis is normalized
 
@@ -56,7 +56,7 @@ export var quat_setFromAxisAngle = (q, axis, angle) => {
   return q;
 };
 
-export var quat_setFromRotationMatrix = (q, m) => {
+export const quat_setFromRotationMatrix = (q, m) => {
   // http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
   // assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
 
@@ -106,10 +106,10 @@ export var quat_setFromRotationMatrix = (q, m) => {
   return q;
 };
 
-export var quat_angleTo = (a, b) =>
+export const quat_angleTo = (a, b) =>
   2 * Math.acos(Math.abs(clamp(quat_dot(a, b), -1, 1)));
 
-export var quat_rotateTowards = (a, b, step) => {
+export const quat_rotateTowards = (a, b, step) => {
   const angle = quat_angleTo(a, b);
 
   if (!angle) return a;
@@ -121,12 +121,12 @@ export var quat_rotateTowards = (a, b, step) => {
   return a;
 };
 
-export var quat_dot = (a, b) => a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+export const quat_dot = (a, b) => a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 
-export var quat_length = (q) =>
+export const quat_length = (q) =>
   Math.sqrt(q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
 
-export var quat_normalize = (q) => {
+export const quat_normalize = (q) => {
   let l = quat_length(q);
 
   if (!l) {
@@ -146,7 +146,7 @@ export var quat_normalize = (q) => {
   return q;
 };
 
-export var quat_multiply = (a, b) => {
+export const quat_multiply = (a, b) => {
   // from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm
   const qax = a.x;
   const qay = a.y;
@@ -165,7 +165,7 @@ export var quat_multiply = (a, b) => {
   return a;
 };
 
-export var quat_slerp = (a, b, t) => {
+export const quat_slerp = (a, b, t) => {
   if (t === 0) return a;
   if (t === 1) return quat_copy(a, b);
 

@@ -1,4 +1,4 @@
-export var bufferAttr_copyVector3sArray = (array, vectors) => {
+export const bufferAttr_copyVector3sArray = (array, vectors) => {
   let offset = 0;
 
   vectors.map((vector) => {

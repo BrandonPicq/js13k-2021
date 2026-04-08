@@ -12,7 +12,7 @@ const _x = vec3_create();
 const _y = vec3_create();
 const _z = vec3_create();
 
-export var mat4_create = () =>
+export const mat4_create = () =>
   // prettier-ignore
   new Float32Array([
     1, 0, 0, 0,
@@ -21,15 +21,15 @@ export var mat4_create = () =>
     0, 0, 0, 1,
   ]);
 
-export var mat4_copy = (a, b) => {
+export const mat4_copy = (a, b) => {
   a.set(b);
   return a;
 };
 
-export var mat4_makeRotationFromQuaternion = (m, q) =>
+export const mat4_makeRotationFromQuaternion = (m, q) =>
   mat4_compose(m, _zero, q, _one);
 
-export var mat4_lookAt = (m, eye, target, up) => {
+export const mat4_lookAt = (m, eye, target, up) => {
   if (!vec3_length(vec3_subVectors(_z, eye, target))) {
     // eye and target are in the same position
     _z.z = 1;
@@ -63,7 +63,7 @@ export var mat4_lookAt = (m, eye, target, up) => {
   return m;
 };
 
-export var mat4_multiplyMatrices = (m, a, b) => {
+export const mat4_multiplyMatrices = (m, a, b) => {
   const [
     a11,
     a21,
@@ -133,7 +133,7 @@ export var mat4_multiplyMatrices = (m, a, b) => {
   return m;
 };
 
-export var mat4_setPosition = (m, v) => {
+export const mat4_setPosition = (m, v) => {
   m[12] = v.x;
   m[13] = v.y;
   m[14] = v.z;
@@ -141,7 +141,7 @@ export var mat4_setPosition = (m, v) => {
   return m;
 };
 
-export var mat4_invert = (m) => {
+export const mat4_invert = (m) => {
   // based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
   const [
     n11,
@@ -309,7 +309,7 @@ export var mat4_invert = (m) => {
   return m;
 };
 
-export var mat4_scale = (m, v) => {
+export const mat4_scale = (m, v) => {
   const {x, y, z} = v;
 
   m[0] *= x;
@@ -331,7 +331,7 @@ export var mat4_scale = (m, v) => {
   return m;
 };
 
-export var mat4_compose = (m, position, quaternion, scale) => {
+export const mat4_compose = (m, position, quaternion, scale) => {
   const {x, y, z, w} = quaternion;
   const x2 = x + x;
   const y2 = y + y;

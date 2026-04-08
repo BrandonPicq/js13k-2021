@@ -1,25 +1,25 @@
-export var component_create = (update, options) => ({
+export const component_create = (update, options) => ({
   parent: undefined,
   update,
   ...options,
 });
 
-export var entity_add = (entity, component) => {
+export const entity_add = (entity, component) => {
   component.parent = entity;
   entity.components.push(component);
   return entity;
 };
 
-export var entity_has = (entity, component) =>
+export const entity_has = (entity, component) =>
   entity.components.includes(component);
 
-export var entity_find = (entity, predicate) =>
+export const entity_find = (entity, predicate) =>
   entity.components.find(predicate);
 
-export var entity_filter = (entity, predicate) =>
+export const entity_filter = (entity, predicate) =>
   entity.components.filter(predicate);
 
-export var entity_remove = (entity, component) => {
+export const entity_remove = (entity, component) => {
   const index = entity.components.indexOf(component);
 
   if (index >= 0) {
@@ -29,5 +29,5 @@ export var entity_remove = (entity, component) => {
   }
 };
 
-export var entity_update = (entity, ...args) =>
+export const entity_update = (entity, ...args) =>
   entity.components.map((component) => component.update(...args));
