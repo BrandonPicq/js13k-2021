@@ -239,7 +239,8 @@ const player_slideMove = (() => {
       // out along it, which fixes some epsilon issues with
       // non-axial planes
       //
-      for (let i = 0; i < numplanes; i++) {
+      let i;
+      for (i = 0; i < numplanes; i++) {
         if (vec3_dot(trace.normal, planes[i]) > 0.99) {
           vec3_add(player.body.velocity, trace.normal);
           break;

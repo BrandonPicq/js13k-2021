@@ -717,7 +717,7 @@ export const map0 = (gl, scene, camera) => {
       component_create((dt) => {
         bodies = physics_bodies(map);
         staticBodies = bodies.filter((body) => body.physics === BODY_STATIC);
-        staticMeshes = staticBodies.map((body) => body.parent);
+        _staticMeshes = staticBodies.map((body) => body.parent);
         physics_update(bodies);
         player.dt = dt;
 

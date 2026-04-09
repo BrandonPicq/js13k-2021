@@ -25,7 +25,7 @@ export const geom_push = (geom, vertices, faces) => {
     );
   }
 
-  for (i = 0; i < faces.length; ) {
+  for (let i = 0; i < faces.length; ) {
     geom.faces.push(
         face3_create(
             offset + faces[i++],
