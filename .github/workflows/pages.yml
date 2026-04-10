@@ -18,7 +18,7 @@ jobs:
     permissions:
       contents: read
       pages: write # nécessaire pour déployer sur GitHub Pages
-      id-token: write # nécessaire pour l'authentification OIDC (sans secret)
+      id-token: write # nécessaire pour l'authentification OIDC (sans secret)!
 
     environment:
       name: github-pages
