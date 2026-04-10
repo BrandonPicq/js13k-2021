@@ -1,18 +1,18 @@
-import { describe, expect, it, vi } from 'vitest';
+import {describe, expect, it, vi} from 'vitest';
 
-import { findTarget } from './ai.js';
+import {findTarget} from './ai.js';
 import {
   component_create,
   entity_add,
   entity_has,
   entity_remove,
 } from './entity.js';
-import { off, on, trigger } from './events.js';
+import {off, on, trigger} from './events.js';
 
 // --- events.js ---
 // Test fonctionnel du cycle d'eventements
 describe('cycle de vie des événements — on / trigger / off', () => {
-  it("On écoute l'événement", () => {
+  it('On écoute l\'événement', () => {
     const target = {};
     const listener = vi.fn(); // vi.fn() crée un espion pour suivre les appels
 
@@ -22,7 +22,7 @@ describe('cycle de vie des événements — on / trigger / off', () => {
     expect(listener).toHaveBeenCalledTimes(1);
   });
 
-  it("Le listener n'est pas appelé si il a été supprimé avec off()", () => {
+  it('Le listener n\'est pas appelé si il a été supprimé avec off()', () => {
     const target = {};
     const listener = vi.fn();
 
@@ -40,15 +40,15 @@ describe('cycle de vie des événements — on / trigger / off', () => {
 // on le retire, et on vérifie qu'il a bien disparu.
 describe('cycle de vie entité — add / has / remove', () => {
   it('un composant ajouté est détecté par entity_has', () => {
-    const entity = { components: [] };
+    const entity = {components: []};
     const comp = component_create(() => {});
 
     entity_add(entity, comp);
     expect(entity_has(entity, comp)).toBe(true);
   });
 
-  it("un composant retiré n'est plus détecté par entity_has", () => {
-    const entity = { components: [] };
+  it('un composant retiré n\'est plus détecté par entity_has', () => {
+    const entity = {components: []};
     const comp = component_create(() => {});
 
     entity_add(entity, comp);
@@ -56,8 +56,8 @@ describe('cycle de vie entité — add / has / remove', () => {
     expect(entity_has(entity, comp)).toBe(false);
   });
 
-  it("le parent est assigné à l'ajout et retiré à la suppression", () => {
-    const entity = { components: [] };
+  it('le parent est assigné à l\'ajout et retiré à la suppression', () => {
+    const entity = {components: []};
     const comp = component_create(() => {});
 
     entity_add(entity, comp);
@@ -73,27 +73,27 @@ describe('cycle de vie entité — add / has / remove', () => {
 // l'ennemi n'attaque pas si la cible est trop loin (FAR),
 // attaque en mêlée sans vérifier la direction,
 // et n'attaque pas si la cible est NEAR mais pas en face.
-describe("findTarget — décision d'attaque de l'IA", () => {
-  const enemy = { position: { x: 0, y: 0, z: 0 } };
+describe('findTarget — décision d\'attaque de l\'IA', () => {
+  const enemy = {position: {x: 0, y: 0, z: 0}};
 
   it('retourne false si la cible est trop loin (FAR)', () => {
-    const target = { position: { x: 2000, y: 0, z: 0 } };
+    const target = {position: {x: 2000, y: 0, z: 0}};
     expect(findTarget(enemy, target)).toBe(false);
   });
 
   it('retourne true si la cible est à portée de mêlée (< 64)', () => {
-    const target = { position: { x: 30, y: 0, z: 0 } };
+    const target = {position: {x: 30, y: 0, z: 0}};
     expect(findTarget(enemy, target)).toBe(true);
   });
 
-  it("retourne false si la cible est NEAR mais pas en face de l'ennemi", () => {
+  it('retourne false si la cible est NEAR mais pas en face de l\'ennemi', () => {
     // Quaternion identité : l'ennemi regarde vers +Z
     // La cible est sur l'axe X → sur le côté, pas devant
     const enemyFacingZ = {
-      position: { x: 0, y: 0, z: 0 },
-      quaternion: { x: 0, y: 0, z: 0, w: 1 },
+      position: {x: 0, y: 0, z: 0},
+      quaternion: {x: 0, y: 0, z: 0, w: 1},
     };
-    const target = { position: { x: 100, y: 0, z: 0 } };
+    const target = {position: {x: 100, y: 0, z: 0}};
     expect(findTarget(enemyFacingZ, target)).toBe(false);
   });
 });

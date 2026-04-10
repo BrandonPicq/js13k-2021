@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import {describe, expect, it} from 'vitest';
 
 import {
   vec3_create,
@@ -10,7 +10,7 @@ import {
 
 describe('vec3_create', () => {
   it('créé un vecteur avec les valeurs données comme prévu', () => {
-    expect(vec3_create(1, 2, 3)).toEqual({ x: 1, y: 2, z: 3 });
+    expect(vec3_create(1, 2, 3)).toEqual({x: 1, y: 2, z: 3});
   });
 });
 
@@ -33,7 +33,7 @@ describe('vec3_equals', () => {
 });
 
 describe('vec3_negate', () => {
-  it("inverse tous les composants d'un vecteur", () => {
-    expect(vec3_negate(vec3_create(1, -2, 3))).toEqual({ x: -1, y: 2, z: -3 });
+  it('inverse tous les composants d\'un vecteur', () => {
+    expect(vec3_negate(vec3_create(1, -2, 3))).toEqual({x: -1, y: 2, z: -3});
   });
 });
