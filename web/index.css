@@ -1,0 +1,123 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0a0a0f;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+header h1 {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-shadow: 0 0 30px rgba(100, 160, 255, 0.6);
+}
+
+header p.tagline {
+  margin-top: 0.75rem;
+  color: #8899bb;
+  font-size: 1rem;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #334;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: #667;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card {
+  background: #12121c;
+  border: 1px solid #1e2035;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 640px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.card h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #4466aa;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  line-height: 1.7;
+  color: #aab;
+  font-size: 0.95rem;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.key {
+  display: inline-block;
+  background: #1e2035;
+  border: 1px solid #334;
+  border-radius: 5px;
+  padding: 0.15rem 0.55rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #ccd;
+}
+
+.controls-grid span:last-child {
+  color: #889;
+  font-size: 0.9rem;
+  align-self: center;
+}
+
+.play-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.9rem 2.5rem;
+  background: linear-gradient(135deg, #1a3a7a, #2255bb);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid #3366cc;
+  transition: filter 0.2s;
+}
+
+.play-btn:hover {
+  filter: brightness(1.2);
+}
+
+footer {
+  margin-top: auto;
+  padding-top: 3rem;
+  font-size: 0.75rem;
+  color: #334;
+  text-align: center;
+}

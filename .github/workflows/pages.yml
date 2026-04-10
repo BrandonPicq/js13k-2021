@@ -1,0 +1,65 @@
+name: CD — GitHub Pages
+
+on:
+  workflow_run:
+    workflows: ['IntegrationContinue']
+    types: [completed]
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  pages:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    permissions:
+      contents: read
+      pages: write # nécessaire pour déployer sur GitHub Pages
+      id-token: write # nécessaire pour l'authentification OIDC (sans secret)
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 25
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build game
+        run: yarn build
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p _site/game
+          cp web/index.html _site/index.html
+          cp -r dist/. _site/game/
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Summary
+        run: |
+          echo "## GitHub Pages déployé 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**URL** : ${{ steps.deploy.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
