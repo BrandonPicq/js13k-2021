@@ -53,8 +53,6 @@ export const findTarget = (enemy, target) => {
   return true;
 };
 
-//test
-
 export const isVisible = (meshes, origin, target) => {
   Object.assign(_ray.origin, origin);
   vec3_subVectors(_ray.direction, target, origin);
