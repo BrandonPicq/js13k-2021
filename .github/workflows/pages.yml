@@ -40,19 +40,13 @@ jobs:
       - name: Build game
         run: yarn build
 
-      - name: Prepare Pages artifact
-        run: |
-          mkdir -p _site/game
-          cp web/index.html _site/index.html
-          cp -r dist/. _site/game/
-
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deploy
